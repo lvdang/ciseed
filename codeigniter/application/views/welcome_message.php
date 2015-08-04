@@ -35,6 +35,27 @@
 			
 			
 		</div>
+		
+	    <div class="col-lg-12 col-sm-12">
+               <table class="table table-striped table-hover">
+                    <thead>
+                         <tr>
+                              <th>id</th>
+                              <th>username</th>
+                              <th>password</th>
+                         </tr>
+                    </thead>
+                    <tbody>
+                         <?php for ($i = 0; $i < count($students); ++$i) { ?>
+                              <tr>
+                                   <td><?php echo $students[$i]->id; ?></td>
+                                   <td><?php echo $students[$i]->user_name; ?></td>
+                                   <td><?php echo $students[$i]->password; ?></td>
+                              </tr>
+                         <?php } ?>
+                    </tbody>
+               </table>
+          </div>
 	
 	<script>
 		(function() {

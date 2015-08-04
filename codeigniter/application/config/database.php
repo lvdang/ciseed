@@ -48,10 +48,9 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = getenv('IP');
-$db['default']['username'] = getenv('C9_USER');
+$db['default']['username'] = 'C9_USER' || getenv('C9_USER') || 'C9_USER';
 $db['default']['password'] = '';
-$db['default']['database'] = 'c9';
+$db['default']['database'] = "test";
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;

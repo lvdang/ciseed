@@ -19,6 +19,11 @@ class User_model extends CI_Model
         
         return $user;
     }
+    
+    public function getAllStudents() {
+        $query = $this->db->query("SELECT * FROM Student");
+        return $query->result();
+    }
 }
 
 ?>

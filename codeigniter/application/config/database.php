@@ -48,7 +48,7 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['username'] = 'C9_USER' || getenv('C9_USER') || 'C9_USER';
+$db['default']['username'] = getenv('C9_USER');
 $db['default']['password'] = '';
 $db['default']['database'] = "test";
 $db['default']['dbdriver'] = 'mysql';

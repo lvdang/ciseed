@@ -21,8 +21,11 @@ class User_model extends CI_Model
     }
     
     public function getAllStudents() {
-        $query = $this->db->query("SELECT * FROM Student");
-        return $query->result();
+      if ($query->num_rows() > 0) {
+            return $query->result();
+        } else {
+            return NULL;
+      }
     }
 }
 

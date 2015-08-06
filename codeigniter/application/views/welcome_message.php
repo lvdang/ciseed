@@ -35,32 +35,64 @@
 			
 			
 		</div>
-		
-	    <div class="col-lg-12 col-sm-12">
-               <table class="table table-striped table-hover">
-                    <thead>
-                         <tr>
-                              <th>id</th>
-                              <th>username</th>
-                              <th>password</th>
-                         </tr>
-                    </thead>
-                    <tbody>
-                         <?php for ($i = 0; $i < count($students); ++$i) { ?>
-                              <tr>
-                                   <td><?php echo $students[$i]->id; ?></td>
-                                   <td><?php echo $students[$i]->user_name; ?></td>
-                                   <td><?php echo $students[$i]->password; ?></td>
-                              </tr>
-                         <?php } ?>
-                    </tbody>
-               </table>
-          </div>
-	
+	         
+         
+        <div class="col-lg-12 col-sm-12">
+            <table class="table table-striped table-hover">
+                <tbody id="main_body"></tbody>
+            </table>
+        </div>
+
 	<script>
-		(function() {
-			console.log($);
-		})();
+		(function($) {
+			 var module = (function() {
+                    var obj = {};
+                    obj.main_body = document.getElementById('main_body');
+
+                    obj.getStudents = function(obj) {
+                    	var dfd = $.Deferred();
+                         $.ajax( { url : "http://localhost/show",
+                         	       dataType: 'JSON',
+                         	       method : 'GET',
+                         	       success : function(json) {
+                         	       	   dfd.resolve(json);
+                         	       },
+                         	       error : function(e) {
+                         	       	   dfd.reject(e);
+                         	       }
+                               });
+                         return dfd.promise();
+                    };
+
+                    obj.build = function(obj) {
+                       var len = obj.length;
+                       for (var i = 0; i < len; i++) {
+                       	  var tr = document.createElement('tr');
+                       	  for (var x in obj[i]) {
+                           var td = document.createElement('td');
+
+                           var textNode = document.createTextNode(obj[i][x]);
+                           td.appendChild(textNode);
+                           tr.appendChild(td);
+                          }
+                          this.main_body.appendChild(tr);
+                       }
+                    }
+
+                    return obj;                  
+			 })();
+
+			 var promise = module.getStudents();
+			 promise.then(function(json) {
+			 	module.build(json);
+                 console.log(json);
+			 }, function(e) {
+                 console.log('error', e);
+			 });
+
+			 console.log($);
+
+		})($);
 	</script>
 	
 	</body>

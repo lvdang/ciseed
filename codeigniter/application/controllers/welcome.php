@@ -17,16 +17,28 @@ class Welcome extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
-       public function index() {
+    public function index() {		 
 		$data['students'] = $this->getStudents();
 		$this->load->view('welcome_message', $data);
-	}
+    }
 
-	public function getStudents() {
+    public function getStudents() {
 		$this->load->model('user_model','', TRUE);
 		$students = $this->user_model->getAllStudents();
 		return $students;
-	}
+    }
+
+     public function getStudentsTest() {
+		$this->load->model('user_model','', TRUE);
+		$students = $this->user_model->getAllStudents();
+		$this->printHeaders();
+                echo json_encode($students);
+     }
+
+   public function printHeaders() {
+   	  header('Access-Control-Allow-Origin: *');
+	  header('Content-Type: application/json');
+   }
 }
 
 /* End of file welcome.php */

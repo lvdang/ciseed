@@ -82,10 +82,8 @@
                     return obj;                  
 			 })();
 
-			 var promise = module.getStudents();
-			 promise.then(function(json) {
+		 module.getStudents().then(function(json) {
 			 	module.build(json);
-                 console.log(json);
 			 }, function(e) {
                  console.log('error', e);
 			 });

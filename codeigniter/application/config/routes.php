@@ -38,7 +38,10 @@
 |
 */
 
+
+
 $route['default_controller'] = "welcome";
+$route['show'] = "welcome/getStudentsTest";
 $route['404_override'] = '';
 
 $route['ciunit'] = "ciunit_controller/index";

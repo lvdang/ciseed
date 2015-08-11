@@ -21,17 +21,34 @@ class Welcome extends CI_Controller {
 		$this->load->view('welcome_message');
 	}
 
-        public function getStudents() {
+       /**
+       * Retrieve all the students from table: Student
+       */
+       public function getStudents() {
 		$this->load->model('user_model','', TRUE);
 		$students = $this->user_model->getAllStudents();
 		$this->printHeaders();
                 echo json_encode($students);
 	}
 
-        public function printHeaders() {
+      /**
+      * Update table : Student
+      */
+	public function updateStudents() {
+		$this->load->model('user_model','', TRUE);
+		$this->printHeaders();
+		 
+		$students = $this->user_model->updateStudents($_POST['students']);
+                echo json_encode($students);
+	}
+
+     /**
+      * Need to allow origin since I am testing on my localhost
+     */
+     public function printHeaders() {
    	  header('Access-Control-Allow-Origin: *');
 	  header('Content-Type: application/json');
-        }
+     }
 }
 
 /* End of file welcome.php */

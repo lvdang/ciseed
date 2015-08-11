@@ -19,13 +19,25 @@ class User_model extends CI_Model
         
         return $user;
     }
-    
+
     public function getAllStudents() {
-      if ($query->num_rows() > 0) {
+        $query = $this->db->query("SELECT * FROM Student");
+        
+        if ($query->num_rows() > 0) {
             return $query->result();
         } else {
             return NULL;
-      }
+        }
+    }
+
+    public function updateStudents($data) {
+        $success = 0;
+        if (is_array($data) && ! empty($data)) {
+           $this->db->update_batch('Student', $data, 'id');
+           $success = $this->db->affected_rows();
+        }
+
+       return array('success' => $success);
     }
 }
 

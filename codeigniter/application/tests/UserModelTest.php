@@ -21,6 +21,14 @@ class UserModelTest extends CIUnit_Framework_TestCase
         
         $this->assertEquals($expectedUser, $this->user->getUserById(1));
     }
+    
+     public function testGetAllStudents() {
+        $result = $this->user->getAllStudents();
+        $resultArray = (array) $result[0]; 
+        $this->assertArrayHasKey('password', $resultArray);
+        $this->assertArrayHasKey('id', $resultArray);
+        $this->assertArrayHasKey('user_name', $resultArray);
+    }
 }
 
 ?>
